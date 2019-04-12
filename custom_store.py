@@ -44,14 +44,33 @@ def handle_Received_Payload(data):
 	rpcport = '9558'
 	chainname = 'chain1'
 
-	api = Savoir(rpcuser, rpcpasswd, rpchost, rpcport, chainname)	
+	api = Savoir(rpcuser, rpcpasswd, rpchost, rpcport, chainname)
+	b = api.liststreamkeys('stream2')
+	q = data["sender"]
+	f = 0
+	for i in range(len(b)):
+		if q == b[i]["key"]:
+			f = 1
+	if f == 0:
+		y= api.getnewaddress()
+		api.publish('stream2',q,{"text":y})
+
+
+	c = api.liststreamkeys('stream3')
+	f1 = 0
+	for j in range(len(c)):
+		if q == c[j]["key"]:
+			f1 = 1
+	if f1 == 0:
+		api.publish('stream3',q,{"text":data["topic"]})			
+
 	data["message"]=data["message"].replace('"',"")
 	data["topic"]=data["topic"].replace("'","")
 	print (data["message"])
 	jst = json.dumps(data)
 	jst = jst.replace('"',"'")
 	
-	print (jst)		
+			
 	api.publish('stream1',data["sender"],{"json":jst})
 
 	result = datasend.receive_data(data)
