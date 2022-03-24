@@ -1,0 +1,47 @@
+####  Bevywise Networks              ####
+####  IoTPlatform (mqttserver.com)   ####
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+*     This Package has a MQTTClient(MQTTClient.py),MQTTClient-Library(py_mqtt_client.pyc,libmqttclient.so) and ssl client certificate(Certificate) which are used to connect to IoTPlatform (mqttserver.com)
+
+*     The Current IoTPlatform (mqttserver.com) deployement will require authentication detail from MQTTClient to make a connection
+you can test with our demo  authentication(details are below ) or you can create your own credentials by creating a user in mqttserver.com from your browser
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+-------------------------------------
+Configuring MQTTClient(MQTTClient.py)
+-------------------------------------
+
+*   SSL/NonSSL:
+      set "SERVER_PORT" as 8883 for making a ssl connection or 1883 for nonssl connection
+      SSL connection  will take certificate from "/Certificate" folder automatically
+
+*   Server_name:
+      set "SERVER_NAME" as "mqttserver.com" to connect to iotplatform
+
+*   Username & Password
+      if you want to use your own credentials set "MQUsername" for username and "MQPassword" for password by default it will contain a demo credentials username as "demo"  and password as "pwd123"
+
+*   Client name and other "MQTTCONNECT" details 
+      set "MQClientID" to a unique name for defining your mqttclientid and fill will and cleansession details as you desire given under 
+      "#MQTT Connect Details"  comment
+
+*   MQTT Subscribe
+      set "Subscribe_Topic_Name" with your desired topic name and "Subscribe_Topic_Qos" to any qos (0/1/2)
+
+*   MQTT Publish
+      set "Publish_Topic_Name" with your desired topic name 
+      set "Publish_Message" with your desired message and use "Publish_Retain" and "Publish_Qos" to set retain and qos
+
+
+By default all configurations are filled with demo details
+
+------------------------
+Running MQTTClient
+------------------------
+  Step1:  Open your Terminal or commandprompt and make sure you are in this package (MQTTClient_your_os) directory 
+  Step2:  Set your configurations on MQTTClient.py or leave it with default
+  Step3:  Run "python MQTTClient.py"
